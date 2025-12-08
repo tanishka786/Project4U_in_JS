@@ -1,6 +1,6 @@
 # 🎯 JavaScript Mini Projects Collection  
 
-This repository contains a set of **beginner-friendly JavaScript projects** — all created using **HTML, CSS, and Vanilla JS**.  
+This repository contains a set of **beginner-friendly JavaScript projects**, all created using **HTML, CSS, and Vanilla JS**.  
 Each folder represents a standalone mini project and the root files act as a **main landing page**.
 
 ---
