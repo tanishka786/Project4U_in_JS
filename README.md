@@ -45,6 +45,8 @@ Perfect for learning conditions and loops.
 Navigate into its folder (`1-colorChanger`, `2-BMICalculator`, etc.)  
 and open the HTML file inside.
 ---
+# See it live here: https://project4-u-in-js.vercel.app/
+---
 ## 🎉 So What are you waiting for...
 <p align="center">
   <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjF0Y2xzZW52bDR6YTcyMmE0Yml2dmtrNm5lNGtudXp6bmI5bmZldCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bAQH7WXKqtIBrPs7sR/giphy.gif" width="260" style="margin-right: 40px;">
