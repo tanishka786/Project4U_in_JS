@@ -1,29 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+  <title>JS Projects Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js"></script>
+  <script src="https://kit.fontawesome.com/3f50e1da80.js" crossorigin="anonymous"></script>
+  <style>
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+    }
 
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="script.js"></script>
+    .hero-eyebrow {
+      margin-bottom: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 440px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .project-card {
+      display: block;
+      text-decoration: none;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.8rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '→';
+      position: absolute;
+      right: 1.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      color: var(--border);
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::after {
+      color: var(--accent);
+      right: 1.3rem;
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 85%;
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+  </style>
 </head>
 
-<body style="background-color: #212121; color: #fff">
-    <nav>
-        <a href="/" aria-current="page">Home</a>
-        <a target="_blank" href="https://github.com/tanishka786">Github Link</a>
-    </nav>
-    <main>
-        <h1>Code Like a Pro 😎</h1>
-        <div class="projects">
-            <a class="project-link" href="./1-colorChanger/index.html">Project 1 - color Changer 🔥</a>
-            <a class="project-link" href="./2-BMICalculator/index.html">Project 2 - BMI Generator ☕️</a>
-            <a class="project-link" href="./3-DigitalClock/index.html">Project 3 - Digital clock 😎</a>
-            <a class="project-link" href="./4-GuessTheNumber/index.html">Project 4 - Guess the number 🤨</a>
-        </div>
-    </main>
+<body>
+  <nav>
+    <a href="/" class="nav-brand">Tan-the-developer🪄🌟✌🏻</a>
+    <div class="nav-links">
+      <a href="/" aria-current="page">Home</a>
+      <a target="_blank" href="https://github.com/tanishka786">GitHub ↗</a>
+      <button class="theme-toggle" id="themeBtn" title="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero-eyebrow"><span class="tag">JavaScript Projects</span></div>
+    <h1>Code Like a <span>Pro 😎</span></h1>
+    <p class="hero-sub">Four hand-crafted JavaScript mini-projects to learn, explore, and have fun with.</p>
+
+    <div class="projects-grid">
+      <a class="project-card" href="./1-colorChanger/index.html">
+        <span class="card-icon">🎨</span>
+        <div class="card-num">Project 01</div>
+        <div class="card-title">Color Changer 🔥</div>
+        <div class="card-desc">Click a color swatch to instantly repaint the page background.</div>
+      </a>
+      <a class="project-card" href="./2-BMICalculator/index.html">
+        <span class="card-icon">☕</span>
+        <div class="card-num">Project 02</div>
+        <div class="card-title">BMI Calculator</div>
+        <div class="card-desc">Enter your height and weight to calculate your Body Mass Index.</div>
+      </a>
+      <a class="project-card" href="./3-DigitalClock/index.html">
+        <span class="card-icon">⏱</span>
+        <div class="card-num">Project 03</div>
+        <div class="card-title">Digital Clock 😎</div>
+        <div class="card-desc">A live ticking clock showing your real local time.</div>
+      </a>
+      <a class="project-card" href="./4-GuessTheNumber/index.html">
+        <span class="card-icon">🎯</span>
+        <div class="card-num">Project 04</div>
+        <div class="card-title">Guess the Number 🤨</div>
+        <div class="card-desc">10 attempts to guess a secret number between 1 and 100.</div>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const btn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
+  <div class="copyright">
+    <p>
+      Copyright &copy; Tanishka. Made with Immersed
+      <i class="fa-solid fa-heart"></i> love for coding by
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      Tan-the-developer <i class="fa-regular fa-hand-peace"></i>
+    </p>
+  </div>
+
+
 </body>
 
 </html>

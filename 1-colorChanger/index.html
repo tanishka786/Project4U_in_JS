@@ -1,44 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../style.css" />
-    <title>JavaScript Background Color Switcher</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Color Scheme Switcher</title>
 </head>
 
 <body>
     <nav>
-        <a href="/" aria-current="page">Home</a>
-        <a target="_blank" href="https://github.com/tanishka786">Github Link</a>
+        <a href="../index.html" class="nav-brand">⬡ Dev.Lab</a>
+        <div class="nav-links">
+            <a href="../index.html">← Back</a>
+            <a target="_blank" href="https://github.com/tanishka786">GitHub ↗</a>
+            <button class="theme-toggle" id="themeBtn" title="Toggle dark mode">🌙</button>
+        </div>
     </nav>
-    <div class="canvas">
-        <!-- <a
-        style="
-          background-color: #fff;
-          padding: 10px 30px;
-          border-radius: 8px;
-          color: #212121;
-          text-decoration: none;
-          border: 2px solid #212121;
-        "
-        href="../index.html"
-        >Back to Home Page</a
-      > -->
-        <h1>Color Scheme Switcher</h1>
-        <span class="button" id="cyan"></span>
-        <span class="button" id="white"></span>
-        <span class="button" id="orange"></span>
-        <span class="button" id="crimson"></span>
-        <h2>
-            Try clicking on one of the colors above
-            <span>to change the background color of this page!</span>
-        </h2>
+
+    <div class="page-wrap">
+        <span class="tag">Project 01</span>
+        <h1>Color Scheme Switcher 🎨</h1>
+        <p class="subtitle">Click any swatch below to repaint the entire page background instantly.</p>
+
+        <div class="palette">
+            <div class="swatch-wrap" data-color="#00c9b1" data-name="Cyan">
+                <span class="swatch" id="cyan"></span>
+                <span class="swatch-label">Cyan</span>
+            </div>
+            <div class="swatch-wrap" data-color="#f5f5f5" data-name="White">
+                <span class="swatch" id="white"></span>
+                <span class="swatch-label">White</span>
+            </div>
+            <div class="swatch-wrap" data-color="#ff8c42" data-name="Orange">
+                <span class="swatch" id="orange"></span>
+                <span class="swatch-label">Orange</span>
+            </div>
+            <div class="swatch-wrap" data-color="#e8264a" data-name="Crimson">
+                <span class="swatch" id="crimson"></span>
+                <span class="swatch-label">Crimson</span>
+            </div>
+        </div>
+
+        <div class="status-pill">
+            <span class="status-dot" id="status-dot"></span>
+            Active: <span id="current-color">None</span>
+        </div>
     </div>
+
     <script src="script.js"></script>
+    <script>
+        // Theme toggle
+        const btn = document.getElementById('themeBtn');
+        const html = document.documentElement;
+        const saved = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', saved);
+        btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+        btn.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            btn.textContent = next === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
 </body>
 
 </html>

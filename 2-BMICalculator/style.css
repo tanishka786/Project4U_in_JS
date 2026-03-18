@@ -1,47 +1,180 @@
-.container {
-    width: 575px;
-    height: 825px;
+/* ============================================================
+   BMI CALCULATOR — style.css
+   Light mode default. Dark mode via [data-theme="dark"]
+   ============================================================ */
 
-    background-color: #797978;
-    padding-left: 30px;
+.page-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  padding: 2rem;
 }
 
-#height,
-#weight {
-    width: 150px;
-    height: 25px;
-    margin-top: 30px;
-}
-
-#weight-guide {
-    margin-left: 75px;
-    margin-top: 25px;
-}
-
-#results {
-    font-size: 35px;
-    margin-left: 90px;
-    margin-top: 20px;
-    color: rgb(241, 241, 241);
-}
-
-button {
-    width: 150px;
-    height: 35px;
-    margin-left: 90px;
-    margin-top: 25px;
-    background-color: #fff;
-    padding: 1px 30px;
-    border-radius: 8px;
-    color: #212121;
-    text-decoration: none;
-    border: 2px solid #212121;
-
-    font-size: 25px;
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem 2.2rem;
+  box-shadow: var(--shadow-md);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 h1 {
-    padding-left: 15px;
-    padding-top: 25px;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
 
+.card-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+/* ── Form fields ── */
+.field {
+  margin-bottom: 1.2rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.45rem;
+}
+
+.field input[type="text"] {
+  width: 100%;
+  padding: 0.78rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font);
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+  transition: all 0.22s ease;
+}
+
+.field input[type="text"]:focus {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(79,110,247,0.1);
+}
+
+.field input[type="text"]::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ── Button ── */
+.calc-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.22s ease;
+  margin-top: 0.3rem;
+}
+
+.calc-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79,110,247,0.3);
+}
+
+.calc-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Result ── */
+#results {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+#results.show { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#results .result-category {
+  display: block;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* ── Weight Guide ── */
+.guide {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1.5px solid var(--border);
+}
+
+.guide-title {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+}
+
+.guide-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-row:last-child { border-bottom: none; }
+
+.guide-row .dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.guide-row span:last-child {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
 }

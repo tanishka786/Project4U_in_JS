@@ -1,109 +1,80 @@
-const randomNumber = parseInt(Math.random() * 100 + 1);
+let randomNumber = parseInt(Math.random() * 100 + 1);
 
-const submit = document.querySelector('#subt');
-const userInput = document.querySelector('#guessField');
-const guessSlot = document.querySelector('.guesses');
-const remaining = document.querySelector('.lastResult');
-const lowOrHi = document.querySelector('.lowOrHi');
-const startOver = document.querySelector('.resultParas');
-
-const p = document.createElement('p')
+const submit        = document.querySelector('#subt');
+const userInput     = document.querySelector('#guessField');
+const remaining     = document.getElementById('remaining-count');
+const guessCount    = document.getElementById('guess-count');
+const chipsWrap     = document.getElementById('chips');
+const messageBox    = document.getElementById('message');
+const restartBtn    = document.getElementById('restart-btn');
 
 let prevGuess = [];
-let numGuess = 1;
+let numGuess  = 0;
+let playGame  = true;
 
-let playGame = true;
-
-if (playGame) {
-    submit.addEventListener('click', function (e) {
-        e.preventDefault();
-        const guess = parseInt(userInput.value);
-        console.log(guess);
-        validateGuess(guess);
-
-    });
+function setMessage(text, type = '') {
+    messageBox.textContent = text;
+    messageBox.className   = 'message-box' + (type ? ' ' + type : '');
 }
 
-
-// for adding the range of number that is valid
-function validateGuess(guess) {
-    // if  entered number in Nan
-    if (isNaN(guess)) {
-        alert('Please enter a valid number')
-    }
-    else if (guess < 1) {
-        alert('Please enter a number more than 1')
-    }
-    else if (guess > 100) {
-        alert('Please enter a number less than 100')
-    }
-    else {
-        prevGuess.push(guess)
-        if (numGuess === 11) {
-            displayGuess(guess)
-            displayMessage(`Game Over. Random number was ${randomNumber}`)
-            endGame()
-        }
-        else {
-            displayGuess(guess)
-            checkGuess(guess)
-        }
-    }
+function addChip(num) {
+    const chip = document.createElement('span');
+    chip.className   = 'chip';
+    chip.textContent = num;
+    chipsWrap.appendChild(chip);
 }
 
-// checking how near or far the guessed value is
-function checkGuess(guess) {
-    if (guess === randomNumber) {
-        displayMessage('Your guessed it right');
-        endGame();
-    }
-    else if (guess < randomNumber) {
-        displayMessage('Number is Tooo Low');
-    }
-    else if (guess > randomNumber) {
-        displayMessage('Number is Tooo High');
-    }
-}
+submit.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!playGame) return;
 
-// to calculate  no of guesses left for the user to guess a number
-function displayGuess(guess) {
-    userInput.value = '';
-    guessSlot.innerHTML += `${guess}    `;
+    const guess = parseInt(userInput.value);
+
+    if (isNaN(guess) || guess < 1 || guess > 100) {
+        setMessage('⚠️ Please enter a valid number between 1 and 100.');
+        return;
+    }
+
     numGuess++;
-    remaining.innerHTML = `${12 - numGuess}`;
-}
-
-//for printing the msg of valid guess 
-function displayMessage(message) {
-    lowOrHi.innerHTML = `<h2>${message}</h2>`;
-}
-
-//func to start new game or to end game
-function endGame() {
+    prevGuess.push(guess);
     userInput.value = '';
-    userInput.setAttribute('disabled', '');
-    p.classList.add('button');
-    p.innerHTML = `<h2 id = "newGame"> Start new Game </h2>`;
-    startOver.appendChild(p);
+    addChip(guess);
+
+    guessCount.textContent   = numGuess;
+    remaining.textContent    = Math.max(0, 10 - numGuess);
+
+    if (guess === randomNumber) {
+        setMessage(`🎉 Correct! The number was ${randomNumber}. Got it in ${numGuess} guess${numGuess > 1 ? 'es' : ''}!`, 'win');
+        endGame();
+    } else if (numGuess >= 10) {
+        setMessage(`💀 Game Over! The number was ${randomNumber}.`, 'lose');
+        endGame();
+    } else if (guess < randomNumber) {
+        setMessage('📈 Too low! Try going higher.', 'low');
+    } else {
+        setMessage('📉 Too high! Try going lower.', 'high');
+    }
+});
+
+function endGame() {
     playGame = false;
-    newGame();
+    userInput.setAttribute('disabled', '');
+    submit.setAttribute('disabled', '');
+    restartBtn.classList.add('show');
 }
 
+restartBtn.addEventListener('click', function () {
+    randomNumber = parseInt(Math.random() * 100 + 1);
+    prevGuess    = [];
+    numGuess     = 0;
+    playGame     = true;
 
-function newGame() {
-    const newGameButton = document.querySelector('#newGame');
-    newGameButton.addEventListener('click', function (e) {
-
-        // resting all variables
-        randomNumber = parseInt(Math.random() * 100 + 1);
-        prevGuess = [];
-        numGuess = 1;
-        guessSlot.innerHTML = '';
-        remaining.innerHTML = `${12 - numGuess}`;
-        userInput.removeAttribute('disabled');
-        startOver.removeChild(p);
-
-        playGame = true;
-    });
-}
-
+    chipsWrap.innerHTML         = '';
+    guessCount.textContent      = 0;
+    remaining.textContent       = 10;
+    userInput.value             = '';
+    userInput.removeAttribute('disabled');
+    submit.removeAttribute('disabled');
+    restartBtn.classList.remove('show');
+    setMessage('Pick a number and take a shot! 🎯');
+});

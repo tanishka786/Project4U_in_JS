@@ -1,39 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Number Guessing Game</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-
-<body style="background-color:#212121; color:#fff;">
-    <nav>
-        <a href="/" aria-current="page">Home</a>
-        <a target="_blank" href="https://github.com/tanishka786">Github Link</a>
-    </nav>
-
-    <div id="wrapper">
-        <h1>Number guessing game</h1>
-        <p>Try and guess a random number between 1 and 100.</p>
-        <p>You have 10 attempts to guess the right number.</p>
-        </br>
-        <form class="form">
-            <label2 for="guessField" id="guess">Guess a number</label>
-                <input type="text" id="guessField" class="guessField">
-                <input type="submit" id="subt" value="Submit guess" class="guessSubmit">
-        </form>
-
-        <div class="resultParasb">
-            <p>Previous Guesses: <span class="guesses"></span></p>
-            <p>Guesses Remaining: <span class="lastResult">10</span></p>
-            <p class="lowOrHi"></p>
-        </div>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-brand">⬡ Dev.Lab</a>
+    <div class="nav-links">
+      <a href="../index.html">← Back</a>
+      <a target="_blank" href="https://github.com/tanishka786">GitHub ↗</a>
+      <button class="theme-toggle" id="themeBtn" title="Toggle dark mode">🌙</button>
     </div>
-    <script src="script.js"></script>
-</body>
+  </nav>
 
+  <div class="page-wrap">
+    <div class="game-card">
+      <span class="tag">Project 04</span>
+      <h1>Guess the Number 🎯</h1>
+      <p class="game-desc">A secret number between <strong>1 and 100</strong> is hiding. You have <strong>10 attempts</strong> to find it.</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="remaining-count">10</div>
+          <div class="stat-label">Remaining</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="guess-count">0</div>
+          <div class="stat-label">Guesses</div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <input type="number" id="guessField" placeholder="1 – 100" min="1" max="100" />
+        <input type="submit" id="subt" value="Guess →" class="guessSubmit" />
+      </div>
+
+      <div class="message-box" id="message">Pick a number and take a shot! 🎯</div>
+
+      <div class="guesses-section">
+        <div class="guesses-label">Previous Guesses</div>
+        <div class="chips-wrap" id="chips"></div>
+        <p class="lowOrHi" style="display:none"></p>
+      </div>
+
+      <div class="resultParas"></div>
+      <button id="restart-btn">↺ Start New Game</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const btn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
+</body>
 </html>

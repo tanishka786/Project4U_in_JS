@@ -1,36 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="style.css" />
   <title>BMI Calculator</title>
 </head>
-
 <body>
   <nav>
-    <a href="/" aria-current="page">Home</a>
-    <a target="_blank" href="https://github.com/tanishka786">Github Link</a>
+    <a href="../index.html" class="nav-brand">⬡ Dev.Lab</a>
+    <div class="nav-links">
+      <a href="../index.html">← Back</a>
+      <a target="_blank" href="https://github.com/tanishka786">GitHub ↗</a>
+      <button class="theme-toggle" id="themeBtn" title="Toggle dark mode">🌙</button>
+    </div>
   </nav>
-  <div class="container">
-    <h1>BMI Calculator</h1>
-    <form>
-      <p><label>Height in CM: </label><input type="text" id="height" /></p>
-      <p><label>Weight in KG: </label><input type="text" id="weight" /></p>
-      <button>Calculate</button>
-      <div id="results"></div>
-      <div id="weight-guide">
-        <h3>BMI Weight Guide</h3>
-        <p>Under Weight = Less than 18.6</p>
-        <p>Normal Range = 18.6 and 24.9</p>
-        <p>Overweight = Greater than 24.9</p>
-      </div>
-    </form>
-  </div>
-</body>
-<script src="script.js"></script>
 
+  <div class="page-wrap">
+    <div class="card">
+      <span class="tag">Project 02</span>
+      <h1>BMI Calculator ☕</h1>
+      <p class="card-sub">Enter your measurements to find your Body Mass Index.</p>
+
+      <form id="bmi-form">
+        <div class="field">
+          <label for="height">Height (cm)</label>
+          <input type="text" id="height" placeholder="e.g. 175" />
+        </div>
+        <div class="field">
+          <label for="weight">Weight (kg)</label>
+          <input type="text" id="weight" placeholder="e.g. 70" />
+        </div>
+        <button type="submit" class="calc-btn">Calculate BMI →</button>
+      </form>
+
+      <div id="results">
+        <span id="bmi-value">—</span>
+        <span class="result-category" id="bmi-cat"></span>
+      </div>
+
+      <div class="guide">
+        <div class="guide-title">BMI Reference Guide</div>
+        <div class="guide-row">
+          <span><span class="dot" style="background:#60a5fa"></span>Underweight</span>
+          <span>&lt; 18.6</span>
+        </div>
+        <div class="guide-row">
+          <span><span class="dot" style="background:#34d399"></span>Normal Range</span>
+          <span>18.6 – 24.9</span>
+        </div>
+        <div class="guide-row">
+          <span><span class="dot" style="background:#f87171"></span>Overweight</span>
+          <span>&gt; 24.9</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const btn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
+</body>
 </html>

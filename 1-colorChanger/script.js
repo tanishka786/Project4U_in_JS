@@ -1,26 +1,22 @@
-const buttons = document.querySelectorAll('.button');
-const body = document.querySelector("body")
+const swatchWraps = document.querySelectorAll('.swatch-wrap');
+const body = document.querySelector('body');
+const currentColorLabel = document.getElementById('current-color');
+const statusDot = document.getElementById('status-dot');
 
-buttons.forEach(function (button) {
-    console.log(button);
-    button.addEventListener("click", function (e) // here e stands for event to click a button
-    {
-        console.log(e);
-        console.log(e.target);
-        if (e.target.id === 'cyan') {
-            body.style.backgroundColor = e.target.id;
-        }
-        if (e.target.id === 'white') {
-            body.style.backgroundColor = e.target.id;
-        }
-        if (e.target.id === 'orange') {
-            body.style.backgroundColor = e.target.id;
-        }
-        if (e.target.id === 'crimson') {
-            body.style.backgroundColor = e.target.id;
-        }
-    });
+swatchWraps.forEach(function (wrap) {
+  wrap.addEventListener('click', function () {
+    const color = wrap.getAttribute('data-color');
+    const name  = wrap.getAttribute('data-name');
+
+    // Apply background
+    body.style.backgroundColor = color;
+
+    // Update status pill
+    currentColorLabel.textContent = name;
+    statusDot.style.background = color;
+
+    // Toggle active class on swatches
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+    wrap.querySelector('.swatch').classList.add('active');
+  });
 });
-
-
-
